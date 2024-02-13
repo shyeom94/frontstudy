@@ -17,7 +17,7 @@
 
     /*
       JavaScript
-      1. ECMAScript(ES)가 원래 명칭이다.
+      1. ECMAScript(ES)가 원래 명칭이다. ES5 기준.
       2. <script> 태그는 <head> 태그나 <body> 태그에 작성한다. 
       3. HTML 구성 요소의 생성/수정/삭제 작업을 수행할 수 있다. 
       4. 사용자 동작(이벤트)에 따라 특정 작업을 수행할 수 있다.      
@@ -30,13 +30,13 @@
       JavaScript 출력 방식
   
         1. 경고창
-          window.alert(출력메시지) 
+          window.alert(출력메시지); 
   
         2. 브라우저 화면 
-          document.write(출력메시지) 
+          document.write(출력메시지); 
         
         3. 콘솔 출력 
-          console.log(출력메시지) 
+          console.log(출력메시지); 
     */
 
     window.alert('Hello world');
@@ -112,6 +112,15 @@
     console.log(y);
     var y = 20;     // var y; y = 20; 분리된 후, var y; 만 호이스팅된다.
     console.log(y);
+
+    // 사용 Use
+    double(5); // => 10
+
+    // 선언 Declare
+    function double(num) {
+    return num * 2;
+    }
+    
   </script>
 
   <script>
