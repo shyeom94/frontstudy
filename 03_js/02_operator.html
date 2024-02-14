@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_operator</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>02_operator</title>
-</head>
-
-<body>
-  <script>
-
-    /*
+  <body>
+    <script>
+      /*
       1. 산술 연산자 
         1) 더하기 : + 
         2) 빼기   : - 
@@ -46,55 +44,53 @@
         +
     */
 
-    console.log(1 == '1');      // true 
-    console.log(1 === '1');     // false 
+      console.log(1 == "1"); // true
+      console.log(1 === "1"); // false
 
-    // false 는 0으로 간주한다. 
-    console.log(0 == false);    // true 
+      // false 는 0으로 간주한다.
+      console.log(0 == false); // true
 
-    // true 는 1로 간주한다. 
-    console.log(1 == true);     // true 
-    console.log(2 + true);      // 3
+      // true 는 1로 간주한다.
+      console.log(1 == true); // true
+      console.log(2 + true); // 3
 
-    // 0, 빈 문자열('') 등 데이터가 없는 경우 false로 간주한다.
-    var a = '';
-    console.log(!a);            // true 
+      // 0, 빈 문자열('') 등 데이터가 없는 경우 false로 간주한다.
+      var a = "";
+      console.log(!a); // true
 
-    // 데이터가 있는 경우 true 로 간주한다. 
-    var b = 'hello';
-    console.log(!b);            // false 
+      // 데이터가 있는 경우 true 로 간주한다.
+      var b = "hello";
+      console.log(!b); // false
 
-    // short circuit 을 활용한 디폴트 처리하기 
-    // 값이 없는 경우, 기본값으로 사용할 데이터를 지정하기 
+      // short circuit 을 활용한 디폴트 처리하기
+      // 값이 없는 경우, 기본값으로 사용할 데이터를 지정하기
 
-    // 전달 값이 없는 경우, '기본값' 사용
-    var x = ''; 
-    var y = x || '기본값'; 
-    console.log(y); 
+      // 전달 값이 없는 경우, '기본값' 사용
+      var x = "";
+      var y = x || "기본값";
+      console.log(y);
 
-    // 전달 값이 있는 경우 전달 값 그대로 사용 
-    var x = '고길동'; 
-    var y = x || '기본값'; 
-    console.log(y); 
+      // 전달 값이 있는 경우 전달 값 그대로 사용
+      var x = "고길동";
+      var y = x || "기본값";
+      console.log(y);
 
-    // 일급 계산하기
-    // 시급 : 9860원
-    // 8시간까지는 시급
-    // 8시간 초과 근무는 시급 * 1.5
-    // 10시간 근무 시 일급 계산하기 
+      // 일급 계산하기
+      // 시급 : 9860원
+      // 8시간까지는 시급
+      // 8시간 초과 근무는 시급 * 1.5
+      // 10시간 근무 시 일급 계산하기
 
-    var hourlyWage = 9860;
-    var workingTime = 10;
+      var hourlyWage = 9860;
+      var workingTime = 10;
 
-    var regularPay = hourlyWage * workingTime;
-    var extraPay = (workingTime <= 8) ? 0 : (workingTime - 8) * hourlyWage * 0.5;
+      var regularPay = hourlyWage * workingTime;
+      var extraPay =
+        workingTime <= 8 ? 0 : (workingTime - 8) * hourlyWage * 0.5;
 
-    console.log('일급은 ' + (regularPay + extraPay) + '입니다.');
+      console.log("일급은 " + (regularPay + extraPay) + "입니다.");
 
-    console.log((hourlyWage * 8) + (((hourlyWage) * 1.5) * 2));
-
-  </script>
-
-</body>
-
+      console.log(hourlyWage * 8 + hourlyWage * 1.5 * 2);
+    </script>
+  </body>
 </html>

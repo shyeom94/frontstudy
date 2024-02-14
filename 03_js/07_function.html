@@ -1,33 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07_function</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>07_function</title>
-</head>
-
-<body>
-
-  <script>
-
-    /*
+  <body bgcolor="gray">
+    <script>
+      /*
       함수 작성 방법 
       1. 함수 선언(함수 정의) 
       2. 함수 표현식 
     */
+    </script>
 
-  </script>
-
-  <script>
-
-    /*
+    <script>
+      /*
      함수 선언(함수 정의) 
      1. 함수 이름을 직접 결정하는 방식이다. 
      2. 호이스팅된다. (먼저 처리된다.) 
      3. 형식 
       1) 함수 선언 
-        function 함수이름([매개변수]) { (=> 반환 타입 문법은 존재하지 않는다. return 여부와 관계없이)
+        function 함수이름([매개변수]) { (=> 반환 타입(void) 문법은 존재하지 않는다. return 여부와 관계없이)
           함수본문
           [return 반환값]
         }
@@ -35,19 +30,17 @@
         함수 이름([인자])
     */
 
-    // 호이스팅으로 실행에 문제 없다. 
-    myFunc1();
+      // 호이스팅으로 실행에 문제 없다.
+      myFunc1();
 
-    // 함수 선언(정의)
-    function myFunc1() {
-      window.alert('myFunc1 실행');
-    }
+      // 함수 선언(정의)
+      function myFunc1() {
+        window.alert("myFunc1 실행");
+      }
+    </script>
 
-  </script>
-
-  <script>
-
-    /*
+    <script>
+      /*
       함수 표현식
       1. 익명 함수(이름없는 함수)와 이름이 있는 함수를 변수에 저장하는 방식이다. 
       2. 호이스팅 되지 "않는다." 
@@ -70,113 +63,190 @@
           변수이름([인자])      
     */
 
-    myFunc2(); // 호이스팅되지 않으므로 실행되지 않는다.(에러메시지) 
+      myFunc2(); // 호이스팅되지 않으므로 실행되지 않는다.(에러메시지)
 
-    var myFunc2 = function () {
-      window.alert('myFunc2 실행');
-    }
+      var myFunc2 = function () {
+        window.alert("myFunc2 실행");
+      };
 
-    myFunc2();
+      myFunc2();
+    </script>
 
-  </script>
-
-  <script>
-
-    /* 
+    <script>
+      /* 
       인자와 매개변수 
       1. 매개변수를 선언할 때 선언 키워드(var)는 사용하지 않는다. 
       2. 매개변수를 선언할 때 매개변수의 이름만 작성한다. 
       3. 매개변수의 디폴트 처리가 가능하다. 
       4. 말 줄임표 (..., 전개 연산자)를 지원한다. 
       5. 인자 객체(arguments)를 지원한다. 
-      6. 
+      6. 매개변수로 함수를 전달할 수 있다. 
     */
 
-    // 일반 변수 : 참조 관계 없음
-    function myFunc3(number) { // 지역변수 number 
-      number = number + 1;
-      alert(number);
-    }
-
-    var number = 10;
-    console.log(number); // 참조관계 확인 : 결과는 10 
-
-    myFunc3(number);
-    console.log(number); // 참조관계 확인 : 결과는 10 
-
-    // 데이터의 종류에 따라 참조관계가 있는지, 없는지 확인 
-
-    // 배열 : 참조 관계 있음 
-    function myFunc4(array) {
-      array[0] = 'Z';
-    }
-
-    var array = ['A', 'B'];
-    console.log(array); // 참조관계 확인 : 결과는 ['A', 'B'] 
-    myFunc4(array);
-    console.log(array); // 참조관계 확인 : 결과는 ['Z', 'B'] 
-
-    // 객체 : 참조 관계 있음 
-    function myFunc5(obj) {
-      obj.maker = '벤츠';
-      obj.model = '이클래스';
-    }
-
-    var obj = {
-      maker: 'bmw',
-      model: '5시리즈'
-    }
-    console.log(obj); // 참조관계 확인 : 결과는 {maker: 'bmw', model: '5시리즈'} 
-    myFunc5(obj);
-    console.log(obj); // 참조관계 확인 : 결과는 {maker: '벤츠', model: '이클래스'} 
-
-    // 매개변수의 디폴트 처리
-    function myFunc6(number) {
-      // 매개변수 number로 전달된 인자 값이 없으면 number를 0으로 처리한다. 
-      // 숏 서킷 방식
-      number = number || 0;
-      console.log(number); 
-    }
-
-    myFunc6();     // 결과 : undefined  // 매개변수 없어도 실행된다.
-    myFunc6(100);  // 결과 : 100  
-
-    // 말 줄임표 (..., 전개 연산자)
-    function myFunc7(...numbers) { // numbers 는 배열로 처리한다.
-      var total = 0;
-      for (var i = 0; i < numbers.length; i++) {
-        total += numbers[i];
+      // 일반 변수 : 참조 관계 없음
+      function myFunc3(number) {
+        // 지역변수 number
+        number = number + 1;
+        alert(number);
       }
-      console.log(total);
-    }
 
-    myFunc7(1, 2, 3);     // 결과 : 6
-    myFunc7(1, 2, 3, 4);  // 결과 : 10  
+      var number = 10;
+      console.log(number); // 참조관계 확인 : 결과는 10
 
-    // 인자 객체(arguments) - 인자를 받는(저장하는) 객체, 배열과 유사하게 동작하는 객체(배열은 아님!) 
-    function myFunc8() {
-      var total = 0;
-      for (var i = 0; i < arguments.length; i++) {
-        total += arguments[i];
+      myFunc3(number);
+      console.log(number); // 참조관계 확인 : 결과는 10
+
+      // 데이터의 종류에 따라 참조관계가 있는지, 없는지 확인
+
+      // 배열 : 참조 관계 있음
+      function myFunc4(array) {
+        array[0] = "Z";
       }
-      console.log(total / arguments.length);
-    }
 
-    myFunc8(1, 2, 3, 4); // 결과 : 2.5 
+      var array = ["A", "B"];
+      console.log(array); // 참조관계 확인 : 결과는 ['A', 'B']
+      myFunc4(array);
+      console.log(array); // 참조관계 확인 : 결과는 ['Z', 'B']
 
-    // 매개변수로 함수 전달하기 
-    function myFunc9 (func) {
-      func(); 
-    }
+      // 객체 : 참조 관계 있음
+      function myFunc5(obj) {
+        obj.maker = "벤츠";
+        obj.model = "이클래스";
+      }
 
-    // 익명 함수 전달 
-    myFunc9(function() {
-      console.log('익명 함수');
-    });
+      var obj = {
+        maker: "bmw",
+        model: "5시리즈",
+      };
+      console.log(obj); // 참조관계 확인 : 결과는 {maker: 'bmw', model: '5시리즈'}
+      myFunc5(obj);
+      console.log(obj); // 참조관계 확인 : 결과는 {maker: '벤츠', model: '이클래스'}
 
+      // 매개변수의 디폴트 처리
+      function myFunc6(number) {
+        // 매개변수 number로 전달된 인자 값이 없으면 number를 0으로 처리한다.
+        // 숏 서킷 방식
+        number = number || 0;
+        console.log(number);
+      }
 
-  </script>
+      myFunc6(); // 결과 : undefined  // 매개변수 없어도 실행된다.
+      myFunc6(100); // 결과 : 100
 
-</body>
+      // 말 줄임표 (..., 전개 연산자)
+      function myFunc7(...numbers) {
+        // numbers 는 배열로 처리한다.
+        var total = 0;
+        for (var i = 0; i < numbers.length; i++) {
+          total += numbers[i];
+        }
+        console.log(total);
+      }
 
+      myFunc7(1, 2, 3); // 결과 : 6
+      myFunc7(1, 2, 3, 4); // 결과 : 10
+
+      // 인자 객체(arguments) - 인자를 받는(저장하는) 객체, 배열과 유사하게 동작하는 객체(배열은 아님!)
+      function myFunc8() {
+        var total = 0;
+        for (var i = 0; i < arguments.length; i++) {
+          total += arguments[i];
+        }
+        console.log(total / arguments.length);
+      }
+
+      myFunc8(1, 2, 3, 4); // 결과 : 2.5
+
+      // ********************** 중요 ***************************
+
+      // 매개변수로 함수 전달하기 - 1
+      function myFunc9(func) {
+        func();
+      }
+
+      // 인자가 없는 익명 함수 전달
+      myFunc9(function () {
+        console.log("인자가 없는 익명 함수");
+      });
+
+      // 매개변수로 함수 전달하기 - 2
+      function myFunc10(func, x, y) {
+        func(x, y); // 인자 전달
+      }
+
+      // 인자가 있는 익명 함수 전달
+      myFunc10(
+        function (x, y) {
+          console.log(x, y);
+        },
+        "Hello",
+        "world"
+      );
+
+      // ********************** 중요 ***************************
+    </script>
+
+    <script>
+      /*
+      반환
+      1. 반환 타입을 작성하지 않는다.
+      2. return 반환값; 을 통해서 반환할 수 있다.
+      3. return; 을 통해서 함수 실행을 종료할 수 있다. 
+    */
+
+      function myMax() {
+        // 전달된 인자 중 최대값 반환하기
+        var max = arguments[0] || 0; // -> || 0 디폴트 처리
+        for (var i = 1; i < arguments.length; i++) {
+          // 요소 비교는 두번째 값 부터
+          if (max < arguments[i]) {
+            max = arguments[i];
+          }
+        }
+        return max;
+      }
+
+      console.log(myMax()); // 결과 : undefined => || 0 디폴트 처리 후, 결과 : 0
+      console.log(myMax(4, 7, 3, 1, 2)); // 결과 : 7
+      console.log(myMax(4, 7, 3, 1, 2, 9, 8, 6)); // 결과 : 9
+    </script>
+
+    <script>
+      /*
+        중첩된 함수
+        1. 함수 안에 함수를 정의할 수 있다.
+        2. 외부 함수는 내부 함수의 매개변수나 변수를 사용할 수 "없다."
+        3. 내부 함수는 외부 함수의 매개변수나 변수를 사용할 수 "있다."
+
+        클로저
+        내부 함수의 수명이 외부 함수보다 길게 유지되는 JavaScript의 기능 
+      */
+      function getAddSquare(x, y) {
+        function getSquare(a) {
+          return a * a;
+        }
+        return getSquare(x) + getSquare(y);
+      }
+
+      var result = getAddSquare(3, 4); // (3 * 3) + (4 * 4) 결과를 반환
+      console.log(result); // 결과 : 25
+
+      // 외부 함수와 내부 함수의 변수 사용
+
+      function outer(a) {
+        // console.log(b); // 접근 불가. 외부 함수는 내부 함수의 변수를 사용할 수 없다.
+        function inner(b) {
+          return a + b; // 내부 함수는 외부 함수의 변수를 사용할 수 있다.
+        }
+        return inner;
+      }
+
+      console.log(outer(10)); // 결과 : 함수 (반환받는 것 : function 10 -> a)
+      console.log(outer(10)(20)); // 결과 : 30
+      //                 a   b
+
+      // 클로저 형성 closer
+      // 함수의 중첩이 가능하기 때문에, 외부 함수의 호출이 끝나도 내부 함수를 살려두는 것.
+    </script>
+  </body>
 </html>
