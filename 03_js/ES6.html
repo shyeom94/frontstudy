@@ -87,8 +87,8 @@
       /*
         화살표 함수 (arrow function)
         1. 익명 함수의 다른 표현 방식이다.
-        2. 형식 
-          1) 화살표 함수를 이용한 함수 표현식 
+        2. 형식
+          1) 화살표 함수를 이용한 함수 표현식
             const 함수이름 = ([매개변수]) => {
 
             }
@@ -96,11 +96,16 @@
             함수이름([인자]);
       */
 
-      const myFunc = () => {
+      const myFunc1 = () => {
         console.log("myFunc 실행");
       };
 
-      myFunc();
+      myFunc1();
+
+      const myFunc2 = () => "hello world";
+      // return 만 존재하는 함수일 경우, 중괄호와 return 키워드를 생략할 수 있다.
+
+      console.log(myFunc2());
     </script>
 
     <script>

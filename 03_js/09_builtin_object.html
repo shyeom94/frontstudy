@@ -8,7 +8,7 @@
   <body bgcolor="gray">
     <script>
       /*
-        JSON 내장 객체
+        [JSON 내장 객체]
         
         1. JavaScript 객체 -> string 형식의 JSON 데이터 
           1) 서버로 데이터를 보낼 때 활용
@@ -31,6 +31,144 @@
       // string 형식의 JSON 데이터 -> JavaScript 객체
       var jsObj = JSON.parse(jsonData);
       console.log(jsObj, typeof jsObj); // 결과 : {maker: 'bmw', model: '5시리즈'} 'object'
+    </script>
+
+    <script>
+      /*
+        [Array 내장 객체]
+
+        1. forEach() : 반복문 
+        2. filter()  : 요소 검사 
+        3. map()     : 배열 요소 바꾸기       // -> Java lambda 에서 공부 
+      */
+
+      // 배열 준비
+      var array = ["game", "travel", "cooking", "movie", "fishing"];
+
+      // forEach()
+      array.forEach(function (element) {
+        // array의 모든 요소가 하나씩 element 로 전달된다. function 의 매개변수로 전달한다.
+        // callBack 함수로 function 을 불러온다. function 은 익명함수
+        console.log(element);
+      });
+      array.forEach(function (element, i) {
+        // i 는 인덱스
+        console.log(i, element);
+      });
+
+      // filter()
+      // filter() 의 결과는 배열이다.
+      array
+        .filter(function (element) {
+          return element.length > 5; // 문자열 길이가 5보다 큰 요소만 남긴 배열을 "반환"함
+          // 전체 결과가 또 다른 배열이라는 뜻
+        })
+        .forEach(function (element) {
+          console.log(element); // 결과 : travel cooking fishing
+        });
+
+      // ES6 버전 화살표함수 적용
+      array
+        .filter((element) => element.length > 5)
+        .forEach((element) => {
+          console.log(element); // 결과 : travel cooking fishing
+        });
+
+      // map()
+      array
+        .map(function (element) {
+          return element + "가자"; // 모든 요소 뒤에 '가자'를 추가한 배열을 "반환"함
+        })
+        .forEach(function (element) {
+          console.log(element);
+        });
+    </script>
+
+    <script>
+      /* [Math 내장 함수] */
+
+      console.log("절대값", Math.abs(-5)); // 5
+
+      console.log("정수 올림값", Math.ceil(5.1)); // 6
+      console.log("정수 올림값", Math.ceil(-5.1)); // -5
+
+      console.log("정수 내림값", Math.floor(5.1)); // 5
+      console.log("정수 내림값", Math.floor(-5.1)); // -6
+
+      console.log("정수 반올림값", Math.round(5.5)); // 6
+      console.log("정수 반올림값", Math.round(-5.5)); // -5
+
+      console.log("정수 절사값", Math.trunc(5.5)); // -5
+      console.log("정수 절사값", Math.trunc(-5.5)); // -5
+
+      console.log("제곱", Math.pow(2, 3)); // 2 ** 3과 동일 === 8
+
+      console.log("제곱근", Math.sqrt(25)); // 루트 25 === 5
+
+      console.log("난수", Math.random()); // 0 <= 난수 < 1
+      console.log("주사위", parseInt(Math.random() * 6 + 1));
+    </script>
+
+    <script>
+      /* [Date 내장 객체] */
+
+      // 현재 날짜와 시간
+      var now = Date(); // new Date().toString()
+      console.log(now, typeof now);
+
+      // 특정 날짜와 시간
+      var someday = new Date(2024, 0, 1, 12, 0, 0); // (2024-01-01 12:00:00) 월은 0 ~ 11 사이 값을 가짐
+      console.log(someday, typeof someday);
+
+      // 타임 스탬프
+      var timestamp = Date.now();
+      console.log(timestamp, typeof timestamp);
+
+      // 날짜/시간 단위 가져오기
+      var now = new Date(); // object 형식의 now
+      var year = now.getFullYear();
+      var month = now.getMonth();
+      var day = now.getDate();
+      var hour = now.getHours();
+      var minute = now.getMinutes();
+      var second = now.getSeconds();
+      var timestamp = now.getTime();
+      console.log(year, month, day, hour, minute, second, timestamp); // month 는 1 증가시켜서 확인한다.
+    </script>
+
+    <script>
+      /* [String 내장 객체] */
+
+      var str = "JavaScript";
+
+      // 1. 길이 반환
+      console.log(str.length); // 괄호가 없는 1ength 속성
+
+      // 2. 특정 인덱스의 문자 반환
+      console.log("첫번째 글자", str.charAt(0));
+      console.log("마지막 글자", str.charAt(str.length - 1));
+
+      // 3. 특정 문자의 인덱스 반환
+      console.log("첫번째 인덱스", str.indexOf("a"));
+      console.log("첫번째 인덱스", str.lastIndexOf("a"));
+
+      // 4. 일부 문자열 반환
+      console.log("Java", str.substring(0, 4)); // 인덱스 0 <= 문자열 < 인덱스 4 ( 둘 다 인덱스 )
+      console.log("Script", str.substring(4)); // 인덱스 4 <= 문자열 끝까지
+
+      console.log("Java", str.substr(0, 4)); // 인덱스 0부터 4글자 (deprecated)
+      console.log("Script", str.substr(4)); // 인덱스 4부터 끝까지 (deprecated)
+
+      console.log("Java", str.slice(0, 4)); // 인덱스 0 <= 문자열 < 인덱스 4
+      console.log("Script", str.slice(4)); // 인덱스 4 <= 문자열 끝까지
+      console.log("Java", str.slice(-10, -6)); // 인덱스 -10 <= 문자열 < 인덱스 -6 (마지막 글자의 인덱스는 -1 이다.)
+      console.log("Script", str.slice(-6)); // 인덱스 -6 <= 문자열 끝까지
+
+      // 5. 특정 패턴을 가지는지 검사 결과를 반환
+      console.log(str.startsWith("Java")); // 'Java'로 시작하면 true 반환
+      console.log(str.endsWith("Script")); // 'Script'로 끝나면 true 반환
+      // 정규 표현식 Regular expression: RegEx
+      console.log(str.match(/[A-Z]/)); // 정규식과 매칭하는 부분이 있으면 캡쳐된 결과의 "첫번째" 요소를 배열로 반환하고, 없으면 null 반환
     </script>
   </body>
 </html>
