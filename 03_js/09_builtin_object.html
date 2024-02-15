@@ -39,7 +39,7 @@
 
         1. forEach() : 반복문 
         2. filter()  : 요소 검사 
-        3. map()     : 배열 요소 바꾸기       // -> Java lambda 에서 공부 
+        3. map()     : 배열 요소 바꾸기  // -> Java lambda 에서 공부 
       */
 
       // 배열 준비
@@ -169,6 +169,49 @@
       console.log(str.endsWith("Script")); // 'Script'로 끝나면 true 반환
       // 정규 표현식 Regular expression: RegEx
       console.log(str.match(/[A-Z]/)); // 정규식과 매칭하는 부분이 있으면 캡쳐된 결과의 "첫번째" 요소를 배열로 반환하고, 없으면 null 반환
+
+      // 6. 치환 결과를 반환 (찾아 바꿈)
+      console.log(str.replace("a", "_")); // 결과 : J_vaScript (발견된 첫번째 문자 a를 _로 치환)
+      console.log(str.replaceAll("a", "_")); // 결과 : J_v_Script (정규식 a와(문자 a를 의미함) 매칭하는 모든 )
+      console.log(str.replaceAll(/[A-Z]/g, "_")); // 결과 : _ava_cript (정규식 : 대문자를 모두 _로 바꿔라)
+
+      // String.prototype. => 함수 커스터마이징 가능
+
+      // 7. 문자열 연결 결과 반환
+      console.log(str.concat("a", "bc", "def")); // 결과 : JavaScriptabcdef
+
+      // 8. 반복 결과 반환
+      console.log(str.repeat(3)); // 결과 : JavaScriptJavaScriptJavaScript
+
+      // 9. 대소문자 변환 결과 반환
+      console.log("대문자 ", str.toUpperCase()); // 결과 : 대문자  JAVASCRIPT
+      console.log("소문자 ", str.toLowerCase()); // 결과 : 소문자  javascript
+
+      // 10. 문자열 앞 뒤에 포함된 불필요한 공백 제거 결과 반환
+      var str = "             Java        Script            ";
+      console.log("앞뒤 공백제거 ", str.trim());
+      console.log("앞   공백제거 ", str.trimStart());
+      console.log("뒤   공백제거 ", str.trimEnd());
+
+      // 11. 문자열 앞 뒤에 특정 문자 채운 결과 반환
+      var str = "JavaScript";
+      console.log("앞에채우기 ", str.padStart(15, "*")); // 전체 15자리 중 부족한 부분은 *로 채우기
+      console.log("뒤에채우기 ", str.padEnd(15, "*")); // 전체 15자리 중 부족한 부분은 *로 채우기
+
+      // 12. 문자열 객체 다루기
+      var str = new String("JavaScript"); // 문자열 객체 (Object)
+      console.log(str, typeof str); // 결과 : String {'JavaScript'} 'object'
+      console.log(str.valueOf(), typeof str.valueOf()); // 결과 : JavaScript string
+
+      // 13. 문자열을 분리해서 배열 반환
+      var str = "a,b,c,d,e";
+      var array = str.split(",");
+      console.log(array); // 결과 : ['a', 'b', 'c', 'd', 'e']
+      var str = array.join(",");
+      console.log(str); // 결과 : a,b,c,d,e
+
+      // 활용 : 특정 문자 모두 지우기(찾아 바꾸기)
+      console.log(str.split(",").join("")); // 결과 : abcde
     </script>
   </body>
 </html>
