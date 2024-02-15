@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>09_builtin_object</title>
+  </head>
+  <body bgcolor="gray">
+    <script>
+      /*
+        JSON 내장 객체
+        
+        1. JavaScript 객체 -> string 형식의 JSON 데이터 
+          1) 서버로 데이터를 보낼 때 활용
+          2) 형식 : JSON.stringify(JS객체)        
+        2. string 형식의 JSON 데이터 -> JavaScript 객체 
+          1) 서버에서 받은 데이터를 분석할 때 활용
+          2) 형식 : JSON.parse(문자열JSON)
+      */
+
+      // JavaScript 객체 준비
+      var car = {
+        maker: "bmw",
+        model: "5시리즈",
+      };
+
+      // JavaScript 객체 -> string 형식의 JSON 데이터
+      var jsonData = JSON.stringify(car);
+      console.log(jsonData, typeof jsonData); // 결과 : {"maker":"bmw","model":"5시리즈"} string
+
+      // string 형식의 JSON 데이터 -> JavaScript 객체
+      var jsObj = JSON.parse(jsonData);
+      console.log(jsObj, typeof jsObj); // 결과 : {maker: 'bmw', model: '5시리즈'} 'object'
+    </script>
+  </body>
+</html>
