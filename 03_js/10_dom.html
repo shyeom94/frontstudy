@@ -17,8 +17,8 @@
           1) var 변수 = document.getElementById(아이디) 
           2) var 배열 = document.getElementsByClassName(클래스) 
           3) var 배열 = document.getElementsByTagName(태그이름) 
-          4) var 변수 = document.querySelector(선택자) 
-          5) var 배열 = document.querySelectorAll(선택자)         
+          4) var 변수 = document.querySelector(선택자) (CSS 에서 배운)
+          5) var 배열 = document.querySelectorAll(선택자) (CSS 에서 배운)
       */
     </script>
     <script>
@@ -62,7 +62,7 @@
     <script>
       /* 내부 요소 : innerHTML 속성 */
       console.log(document.getElementById("div2").innerHTML);
-      document.getElementById("div2").innerHTML = "<em>안녕하쇼</em>";
+      document.getElementById("div2").innerHTML = "<em>안녕하쇼</em>"; // 전달하는 내용에 태그가 포함되어 있으면, 태그를 활성화시킨다.
       document.getElementById("div2").innerHTML += "<mark>반갑소</mark>";
     </script>
 
@@ -109,7 +109,71 @@
         .querySelector("#div3 > img")
         .setAttribute("src", "../../assets/image/animal1.jpg");
       document.querySelector("#div3 > img").removeAttribute("width");
-      console.log(document.querySelector("#div3 > img").getAttribute("alt"));
+      console.log(document.querySelector("#div3 > img").getAttribute("alt")); // 결과 : alt 속성 없으므로 null
+    </script>
+
+    <hr />
+
+    <div id="div4">
+      <input
+        type="radio"
+        name="gender"
+        value="man"
+        class="blind"
+        id="man"
+        checked="checked"
+      />
+      <label for="man">남자</label>
+      <input
+        type="radio"
+        name="gender"
+        value="woman"
+        class="blind"
+        id="woman"
+      />
+      <label for="woman">여자</label>
+    </div>
+
+    <style>
+      #div4 > .blind {
+        display: none; /* 안보이게 숨김 */
+      }
+      #div4 > label {
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        background-color: beige;
+        cursor: pointer;
+      }
+      #div4 > input:checked + label {
+        background-color: bisque;
+      }
+    </style>
+
+    <script>
+      /*
+        문서 객체 속성(property)
+        1. JavaScript 객체 속성을 의미한다.
+        2. 태그에 작성된 속성(attribute)과 대부분 같지만, 다른 것들도 있다. 
+                            |  attribute           property
+          ------------------|-----------------------------------------------                    
+          id="man"          |  id="man"            id="man"
+          class="blind"     |  class="blind"       className="bline"
+          checked="checked" |  checked="checked"   checked="true"
+        3. 객체 속성 접근 방식
+          1) 객체.속성        => 일반적으로 사용하는 방식 
+          2) 객체['속성'] 
+      */
+
+      // class="blind" 속성 없애기
+      // document.getElementsByClassName('blind').className // 문서객체.속성 -> 객체가 아니라 배열이다
+      var blind = document.getElementsByClassName("blind");
+
+      for (var i = 0; i < blind.length; i++) {
+        blind[i].className = "";
+      }
     </script>
   </body>
 </html>
