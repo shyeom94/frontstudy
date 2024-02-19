@@ -138,15 +138,35 @@
     <hr />
 
     <div>
-      <form>
-        <input type="text" id="a" />
-        <button id="btn" type="button">전송</button>
-      </form>
+      <a style="cursor: pointer" id="link3">링크3</a>
+    </div>
+
+    <script>
+      var myWindow = null;
+      document.getElementById("link3").addEventListener("click", function () {
+        if (myWindow === null || myWindow.closed) {
+          var features = "width=" + screen.width / 2;
+          features += ", height=" + screen.height / 2;
+          features += ", top=" + screen.height / 4;
+          features += ", left=" + screen.width / 4;
+          myWindow = window.open("https://www.gdu.co.kr/", "", features);
+        } else {
+          myWindow.focus();
+        }
+      });
+    </script>
+
+    <hr />
+
+    <div>
+      <input type="text" id="a" />
+      <button id="btn" type="button">전송</button>
+      <div>자식 창에서 전송한 값은 <span id="c"></span> 입니다.</div>
     </div>
 
     <script>
       // 전역 객체 (모든 함수와 영역에서 접근할 수 있다.)
-      var popupWindow = null; // 서브 작업, ID 중복 검사
+      var popupWindow = null; // 서브 작업, ID 중복 검사에 활용할 수 있다.
 
       // 창 열기 함수 선언
       function openWindow() {
