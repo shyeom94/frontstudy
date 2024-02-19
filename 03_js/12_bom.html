@@ -52,22 +52,30 @@
 
     <hr />
     <!-- inline 이벤트로 작성 -->
-    <div><img onclick="goGoogle()" src="../../assets/image/logo_google.png" width="100px"></img></div>
+    <div>
+      <button
+        onclick="goGoogle()"
+        src="../../assets/image/logo_google.png"
+        width="100px"
+      >
+        구글
+      </button>
+    </div>
 
     <script>
-      function goGoogle(){
+      function goGoogle() {
         location.href = "https://www.google.com/";
       }
     </script>
 
     <hr />
 
-<div>
-  <button id="btn-open">열기</button>
-</div>
+    <div>
+      <button id="btn-open">열기</button>
+    </div>
 
-<script>
-  /*
+    <script>
+      /*
     var 객체 = window.open([url], [target], [windowfeature]);
     1. url : 열어 줄 창이 나타낼 URL
     2. target : 열어 줄 창의 이름 
@@ -76,16 +84,89 @@
       2) 창 위치 : top, bottom, left, right
   */
 
-  document.getElementById('btn-open').addEventListener('click', function() {
-    var myWindow = window.open();
-    if(!wmyWindow){
-      window.alert('팝업 차단을 해제해 주세요.');
-      console.log(myWindow);
-    }
-  })
+      document
+        .getElementById("btn-open")
+        .addEventListener("click", function () {
+          var myWindow = window.open();
+          if (!wmyWindow) {
+            window.alert("팝업 차단을 해제해 주세요.");
+            console.log(myWindow);
+          }
+        });
+    </script>
 
-</script>
+    <hr />
 
+    <div>
+      <a id="link" href="https://www.gdu.co.kr/">링크</a>
+    </div>
+
+    <script>
+      var myWindow = null;
+      document.getElementById("link").addEventListener("click", function (evt) {
+        if (myWindow === null || myWindow.closed) {
+          myWindow = window.open(evt.target.href);
+        } else {
+          myWindow.focus();
+        }
+        evt.preventDefault();
+      });
+    </script>
+
+    <hr />
+
+    <div>
+      <a id="link2" href="https://www.gdu.co.kr/" target="myWindowName"
+        >링크2</a
+      >
+    </div>
+    <script>
+      var myWindow = null; // 창은 전역변수로 선언해서 사용한다.
+      document
+        .getElementById("link2")
+        .addEventListener("click", function (evt) {
+          if (myWindow === null || myWindow.closed) {
+            myWindow = myWindow.open(evt.target.href, "myWindowName");
+          } else {
+            myWindow.focus();
+          }
+          evt.preventDefault();
+        });
+    </script>
+
+    <hr />
+
+    <div>
+      <form>
+        <input type="text" id="a" />
+        <button id="btn" type="button">전송</button>
+      </form>
+    </div>
+    <script>
+      // 전역 객체 (모든 함수와 영역에서 접근할 수 있다.)
+      var popupWindow = null;
+
+      // 창 열기 함수 선언
+      function openWindow() {
+        if (popupWindow === null || popupWindow.closed) {
+          popupWindow = window.open("12_popup.html");
+        } else {
+          popupWindow.focus();
+        }
+      }
+
+      // 데이터 보내기 함수 선언
+      function sendData() {
+        popupWindow.document.getElementById("b").textContent =
+          window.document.getElementById("a").value;
+      }
+
+      // 클릭 이벤트
+      document.getElementById("btn");
+
+      document.getElementById("btn").onclick = function () {
+        openWindow();
+      };
+    </script>
   </body>
 </html>
- 
