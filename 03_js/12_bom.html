@@ -120,6 +120,7 @@
         >링크2</a
       >
     </div>
+
     <script>
       var myWindow = null; // 창은 전역변수로 선언해서 사용한다.
       document
@@ -142,9 +143,10 @@
         <button id="btn" type="button">전송</button>
       </form>
     </div>
+
     <script>
       // 전역 객체 (모든 함수와 영역에서 접근할 수 있다.)
-      var popupWindow = null;
+      var popupWindow = null; // 서브 작업, ID 중복 검사
 
       // 창 열기 함수 선언
       function openWindow() {
@@ -157,15 +159,17 @@
 
       // 데이터 보내기 함수 선언
       function sendData() {
-        popupWindow.document.getElementById("b").textContent =
-          window.document.getElementById("a").value;
+        // 12.popup.html 문서(객체 popupWindow) 본문을 모두 읽은 뒤에 처리하는 이벤트 : load 이벤트
+        popupWindow.onload = function () {
+          popupWindow.document.getElementById("b").textContent =
+            window.document.getElementById("a").value;
+        };
       }
 
       // 클릭 이벤트
-      document.getElementById("btn");
-
       document.getElementById("btn").onclick = function () {
         openWindow();
+        sendData();
       };
     </script>
   </body>
