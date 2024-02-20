@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS_연습문제2</title>
   </head>
-  <body>
+  <body style="background-color: gray">
     <style>
       #div1 {
         width: 100px;
         height: 100px;
-        background-color: orange;
       }
     </style>
 
@@ -22,30 +21,36 @@
         btn1을 클릭하면 0.5초마다 임의의 색상으로 div1의 색상을 변경하시오.
       */
 
-      function random(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+      function random(begin, count) {
+        return parseInt(Math.random() * count + begin);
       }
 
-      function changeColor() {
-        var r = random(0, 255);
-        var g = random(0, 255);
-        var b = random(0, 255);
-
-        document
-          .querySelector("#div1")
-          .setAttribute(
-            "background-color",
-            "rgb(" + r + ", " + g + ", " + b + ")"
-          );
-
-        console.log(r);
-        console.log(g);
-        console.log(b);
+      function ex01() {
+        document.getElementById("btn1").addEventListener("click", function () {
+          // 초기화 코드
+          document.getElementById("div1").style.backgroundColor =
+            "rgb(" +
+            random(0, 256) +
+            ", " +
+            random(0, 256) +
+            ", " +
+            random(0, 256) +
+            ")";
+          // 반복 실행 인터벌
+          setInterval(function () {
+            document.getElementById("div1").style.backgroundColor =
+              "rgb(" +
+              random(0, 256) +
+              ", " +
+              random(0, 256) +
+              ", " +
+              random(0, 256) +
+              ")";
+          }, 100);
+        });
       }
 
-      document.getElementById("btn1").onclick = function () {
-        setInterval(changeColor, 500);
-      };
+      ex01();
     </script>
 
     <hr />
