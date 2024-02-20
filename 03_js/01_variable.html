@@ -6,7 +6,7 @@
     <title>01_variable</title>
   </head>
 
-  <body>
+  <body style="background-color: gray">
     <script>
       // single-line comment
       /*
@@ -27,7 +27,7 @@
       JavaScript 출력 방식
   
         1. 경고창
-          window.alert(출력메시지); 
+          window.alert(출력메시지); -> window. 생략 가능 
   
         2. 브라우저 화면 
           document.write(출력메시지); 
@@ -37,6 +37,7 @@
     */
 
       window.alert("Hello world");
+      alert("Hello world");
 
       document.write("<h1>Hello world</h1>");
 
@@ -59,7 +60,7 @@
         2) 형식
           var 변수명;
         3) 변수 선언을 생략할 수 있다. 
-        4) 변수 초기화를 생략할 수 있다. (undefined)
+        4) 변수 초기화를 생략할 수 있다. (값 : undefined)
         5) 변수 재선언을 할 수 있다. 
         
       2. 주요 특징
@@ -87,12 +88,13 @@
     </script>
 
     <script>
-      /*
+      /* 중요! 
       호이스팅(hoisting)
       1. JavaScript 인터프리터가 변수나 함수 선언부를 미리 메모리 공간에 할당하는 것을 의미한다. 
       2. 변수 선언을 나중에 해도 먼저 처리된다. * * * * * 
       3. 변수 선언과 초기화를 작성해도 변수 선언 초기화를 분리해서 처리한다. 
-      - 변수 선언 / 변수 초기화 / 변수 할당 
+      - 변수 선언 / 변수 초기화 / 변수 할당
+      - 무언가를 들어올리다 / 끌어올리다  
     */
 
       // 호이스팅에 의한 실행순서
