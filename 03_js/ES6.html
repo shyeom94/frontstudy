@@ -139,15 +139,20 @@
       const xhr = new XMLHttpRequest();
       xhr.open("GET", "https://jsonplaceholder.typicode.com/photos/1");
       xhr.send();
+
       xhr.addEventListener("readystatechange", () => {
+        // 비동기 작업.
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
         if (xhr.status !== 200) return;
         let album = JSON.parse(xhr.responseText); // JavaScript 객체로 바꿔줌
         albumId = album.albumId; // 지역변수 albumId 에 저장
+        console.log("albumID Func in: ", albumId);
       });
-      console.log("albumID: ", albumId);
+
+      console.log("albumID Func out: ", albumId);
+
       // albumId는 1 이기를 기대하지만,
-      // 비동기 작업의응답을 기다리지 않고 곧바로 실행되기 때문에 undifined 상태.
+      // "비동기 작업의 응답을 기다리지 않고" 곧바로 실행되기 때문에 undifined 상태.
     </script>
 
     <script>
@@ -174,6 +179,148 @@
             4) 형식 
               then(()=>{ // 이행 함수 }, ()=>{ // 거부 함수 })
     */
+
+      let albumId2;
+      const myPromise = new Promise((resolve, reject) => {
+        // 비동기 작업
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/photos/1");
+        xhr.send();
+        xhr.addEventListener("readystatechange", () => {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status !== 200)
+            // 상태 거부되었을 때
+            reject(xhr.statusText); // Promise 거부 함수 실행 (거부 사유를 전달할 수 있다.)
+          resolve(JSON.parse(xhr.responseText)); // Promise 이행 함수 실행 (응답 결과를 전달)
+        });
+      });
+      myPromise.then(
+        (resData) => {
+          console.log(resData);
+          albumId2 = resData.albumId;
+          console.log("albumId2 : ", albumId2);
+        },
+        (msg) => {
+          console.log(msg);
+        }
+      );
+    </script>
+
+    <script>
+      // 함수 표현식으로 fnPromise1 만들기
+      const fnPromise1 = (url) => {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.send();
+          // load 이벤트  : XMLHttpRequest 트랜잭션 성공 시 발생하는 이벤트
+          xhr.addEventListener("load", () => {
+            resolve(JSON.parse(xhr.responseText));
+          });
+          // error 이벤트 : 실패 시 발생하는 이벤트
+          xhr.addEventListener("error", () => {
+            reject(xhr.statusText);
+          });
+        });
+      };
+
+      fnPromise1("https://jsonplaceholder.typicode.com/photos/1").then(
+        (resData) => {
+          console.log(resData);
+        },
+        (msg) => {
+          console.log(msg);
+        }
+      );
+    </script>
+
+    <script>
+      const fnPromise2 = (method, url) => {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open(method, url);
+          xhr.send();
+          xhr.addEventListener("load", () => resolve(xhr.responseXML));
+          xhr.addEventListener("error", () => reject(xhr.statusText));
+        });
+      };
+
+      fnPromise2("GET", "https://thetestrequest.com/authors/1.xml").then(
+        (resData) => {
+          console.log(resData); // XMLDocument 출력
+        },
+        (msg) => {
+          console.log(msg);
+        }
+      );
+    </script>
+
+    <script>
+      /*
+        fetch() 전역 함수 
+        1. 네트워크에서 자원(resources) 취득을 시작한 뒤, 
+           응답이 가능한 상태가가 되면 이를 이행하는 Promise를 반환한다.
+        2. Response 객체를 이행 함수에 전달한다. (이행한다.)
+        3. Response 객체가 가진 데이터를 반환하는 메소드
+          1) json() : JSON 데이터를 이행(처리)하는 Promise 반환 
+          2) text() : 텍스트 데이터를 이행(처리)히는 Promise 반환
+          3) blob() : 바이너리(블롭) 데이터를 이행(처리)하는 Promise 반환 
+        4. 형식 
+          fetch(resource, [options])
+          1) resource : 일반적으로 URL 또는 Request 객체
+          2) options 
+            (1) method  : 요청 메소드 (GET, POST, PUT, DELETE 등) 
+            (2) headers : 요청 헤더 
+            (3) body    : 요청 본문 (주로 blob, FormData 등) 
+            (4) mode    : 요청 모드 (cors, non-cors, same-origin) 교차 공유 자원 모드 
+            (5) cache   : HTTP 캐시 (no-cache, force-cache 등) 
+      */
+
+      // options
+      const options = {
+        method: "GET",
+      };
+
+      // JSON
+      fetch("https://jsonplaceholder.typicode.com/photos/1", options)
+        // 실제 응답 성공 여부를 처리하기를 권장  -> 404도 성공으로 본다.
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((resData) => {
+          console.log(resData); // JSON
+        });
+
+      fetch("https://jsonplaceholder.typicode.com/photos/1", options)
+        // 생략 가능한 부분 생략하여 작성
+        .then((response) => response.json())
+        .then((resData) => {
+          console.log(resData); // JSON short
+        });
+
+      // XML
+      fetch("https://thetestrequest.com/authors/1.xml", options)
+        .then((response) => {
+          if (response.ok) return response.text();
+        })
+        .then((resData) => {
+          // console.log(resData); // -> XML 형태로 출력된다. 핸들링 필요함.
+
+          // parseFromString(String, mime-type)
+          // mime-type
+          // 1) text/pain        : 텍스트 데이터
+          // 2) text/html        : HTML 데이터
+          // 3) application/xml  : XML 데이터   [자주 사용]
+          // 4) application/json : JSON 데이터  [자주 사용]
+
+          let domParser = new DOMParser();
+          let xmlDoc = domParser.parseFromString(resData, "application/xml");
+          console.log(xmlDoc);
+        });
+
+      // blob (대표적으로 이미지)
     </script>
   </body>
 </html>
