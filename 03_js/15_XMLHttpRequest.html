@@ -43,8 +43,10 @@
       <div id="contents1"></div>
     </div>
     <script>
-      /* JSON 데이터를 가상으로 제공하는 Fake API : https://jsonplaceholder.typicode.com/ */
-
+      /* JSON 데이터를 가상으로 제공하는 Fake API : 
+      https://jsonplaceholder.typicode.com/ 
+      https://thetestrequest.com/ 
+      */
       function ex01() {
         /* 비동기 요청 */
 
@@ -55,7 +57,8 @@
         // open(RequestMethod, URL, [Sync/Async], [user], [password])
         // 1) RequestMethod : 요청 메소드 (GET, POST, PUT, DELETE 등)
         // 2) URL           : 서버 경로
-        // 3) Sync/Async    : 동기(Sync) 통신 false, 비동기(Async) 통신 true(디폴트)
+        // 3) Sync/Async    : 동기(Sync)    통신 : false
+        //                    비동기(Async) 통신 : true(디폴트)
         xhr.open("GET", "https://jsonplaceholder.typicode.com/photos/1", true);
 
         // 요청 헤더값 설정 (필요하면 설정한다.)
@@ -72,8 +75,7 @@
           //    3) 2 : 요청 전송(send() 호출), HEADER_RECEIVED
           //    4) 3 : 응답 다운로드 중, 일부 받았음, LOADING
           //    5) 4 : 완료, DONE ===> 제일 중요함!
-
-          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.readyState !== XMLHttpRequest.DONE) return; // XMLHttpRequest.DONE === 4
 
           // 2. status 속성 (응답 HTTP 상태 코드)
           if (xhr.status !== 200) {
@@ -85,8 +87,7 @@
           // 3. 응답 데이터 형식에 따른 속성
           //  1) 응답 텍스트 : responseText, 텍스트 반환
           //  2) 응답 XML    : responseXML, Document 반환
-
-          var resData = JSON.parse(xhr.responseText); // 순수 문자열 -> 자바스크립트 객체로 바꿔준다.
+          var resData = JSON.parse(xhr.responseText); // 순수 문자열(responseText)을 자바스크립트 객체로(parse) 바꿔준다.
           var result = '<div class="album">';
           result += "<div>앨범아이디 " + resData.albumId + "</div>";
           result += "<div>아이디 " + resData.id + "</div>";
@@ -102,10 +103,11 @@
           document.getElementById("contents1").innerHTML = result;
         });
       }
-
       document.getElementById("btn1").addEventListener("click", ex01);
     </script>
+
     <hr />
+
     <div id="div2">
       <div>
         <input type="text" id="begin" placeholder="시작NO" />
@@ -124,7 +126,6 @@
         <tbody id="contents2"></tbody>
       </table>
     </div>
-
     <script>
       function ex02() {
         var xhr = new XMLHttpRequest();
@@ -167,8 +168,49 @@
       <button type="button" id="btn3">요청3</button>
       <div id="contents3"></div>
     </div>
-    <script></script>
+    <script>
+      function ex03() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://thetestrequest.com/authors/1.xml");
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status !== 200) return;
+          var resData = xhr.responseXML;
+          var result = "<div>";
+          result +=
+            "<div>id: " +
+            resData.getElementsByTagName("id")[0].textContent +
+            "</div>";
+          result +=
+            "<div>id_type: " +
+            resData.getElementsByTagName("id")[0].getAttribute("type") +
+            "</div>";
+          result +=
+            "<div>name: " +
+            resData.getElementsByTagName("name")[0].textContent +
+            "</div>";
+          result +=
+            '<div><img src="' +
+            resData.getElementsByTagName("avatar")[0].textContent +
+            '" width="150px"></td>';
+          result +=
+            "<div>created-at : " +
+            resData.getElementsByTagName("created-at")[0].textContent +
+            "</div>";
+          result +=
+            "<div>updated-at : " +
+            resData.getElementsByTagName("updated-at")[0].textContent +
+            "</div>";
+          result += "</div>";
+          document.getElementById("contents3").innerHTML = result;
+        };
+      }
+      document.getElementById("btn3").onclick = ex03;
+    </script>
+
     <hr />
+
     <div><button type="button" id="btn4">요청4</button></div>
     <div id="div4">
       <div id="contents4"></div>
@@ -181,7 +223,7 @@
         width: 1000px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        /* justify-content: space-between; */
       }
       #contents4 > .author {
         width: 300px;
@@ -194,6 +236,69 @@
         background-color: orange;
       }
     </style>
-    <script></script>
+    <script>
+      function ex04() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://thetestrequest.com/authors.xml");
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status !== 200) return;
+          var resData = xhr.responseXML;
+          var objects = resData.getElementsByTagName("object");
+          var result = ""; // 빈 문자열 -> 이어붙인다
+
+          for (var i = 0; i < objects.length; i++) {
+            result += '<div class="author">';
+            result +=
+              "  <div>id:" +
+              objects[i].getElementsByTagName("id")[0].textContent +
+              "</div>";
+            result +=
+              "  <div>name:" +
+              objects[i].getElementsByTagName("name")[0].textContent +
+              "</div>";
+            result +=
+              "  <div>email:" +
+              objects[i].getElementsByTagName("email")[0].textContent +
+              "</div>";
+            result +=
+              "  <div>created-at:" +
+              objects[i].getElementsByTagName("created-at")[0].textContent +
+              "</div>";
+            result +=
+              "  <div>updated-at:" +
+              objects[i].getElementsByTagName("updated-at")[0].textContent +
+              "</div>";
+            result +=
+              '  <div><img src="' +
+              objects[i].getElementsByTagName("avatar")[0].textContent +
+              '" width="150px"></div>';
+            result += "</div>";
+          }
+          document.getElementById("contents4").innerHTML = result;
+        };
+      }
+      document.getElementById("btn4").onclick = ex04;
+    </script>
+    <hr />
+    <button id="btn5">공공데이터요청</button>
+    <script>
+      function ex05() {
+        var xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          "http://apis.data.go.kr/B552061/AccidentDeath/getRestTrafficAccidentDeath?searchYear=2020&siDo=1100&guGun=1116&type=json&numOfRows=20&pageNo=1&serviceKey=인코딩인증키"
+        );
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status !== 200) return;
+          var resData = JSON.parse(xhr.responseText);
+          console.log(resData);
+        };
+      }
+      document.getElementById("btn5").onclick = ex05;
+    </script>
   </body>
 </html>
