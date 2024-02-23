@@ -19,39 +19,34 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_basic</title>
+    <!--internal 방식-->
+    <style>
+      /* CSS 주석 */
+      p {
+        color: aquamarine !important;
+      }
+      div {
+        color: crimson;
+      }
+    </style>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>01_basic</title>
-  <!--internal 방식--> 
-  <style>
-    /* CSS 주석 */
-    p{
-      color: aquamarine !important;; 
-    }
-    div {
-      color: crimson; 
-    }
-  </style>
+    <!--external 방식-->
+    <link rel="stylesheet" href="../../assets/css/01_basic.css" />
+  </head>
 
-<!--external 방식-->
-<link rel="stylesheet" href="../../assets/css/01_basic.css">  
+  <body>
+    <!--internal 방식-->
+    <p>Hello</p>
+    <div>안녕하세요</div>
 
-</head>
+    <!--external 방식-->
+    <pre>반갑습니다</pre>
 
-<body>
-
-  <!--internal 방식--> 
-  <p>Hello</p>
-  <div>안녕하세요</div> 
-
-  <!--external 방식-->
-  <pre>반갑습니다</pre> 
-
-  <!-- inline 방식 -->
-  <p style="color: limegreen;"> 다음에 뵙겠습니다 </p>
-
-</body>
-
+    <!-- inline 방식 -->
+    <p style="color: limegreen">다음에 뵙겠습니다</p>
+  </body>
 </html>

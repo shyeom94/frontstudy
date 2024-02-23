@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>08_display</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>08_display</title>
-</head>
+  <body style="background-color: gray">
+    <style>
+      /* 블록 요소 -> 인라인 요소 */
+      /* 거의 사용하지 않는다. */
+      .wrap1 > div {
+        display: inline;
+        width: 100px;
+        height: 100px;
+      }
 
-<body>
-  <style>
-    /* 블록 요소 -> 인라인 요소 */
-    /* 거의 사용하지 않는다. */
-    .wrap1>div {
-      display: inline;
-      width: 100px;
-      height: 100px;
-    }
+      /* 인라인 요소 -> 블록 요소 */
+      /* 레이아웃 배열을 위해서 종종 사용한다.  */
+      .wrap1 > span {
+        display: block;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
-    /* 인라인 요소 -> 블록 요소 */
-    /* 레이아웃 배열을 위해서 종종 사용한다.  */
-    .wrap1>span {
-      display: block;
-      width: 100px;
-      height: 100px;
-    }
-  </style>
+    <div class="wrap1">
+      <div>블록 요소</div>
+      <span>인라인 요소</span>
+    </div>
 
-  <div class="wrap1">
-    <div>블록 요소</div>
-    <span>인라인 요소</span>
-  </div>
+    <hr />
 
-  <hr>
+    <style>
+      /* 인라인 블록 요소 만들기 */
 
-  <style>
-    /* 인라인 블록 요소 만들기 */
+      .wrap2 > div {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border: 1px solid gray;
+      }
+    </style>
 
-    .wrap2>div {
-      display: inline-block;
-      width: 100px;
-      height: 100px;
-      border: 1px solid gray;
-    }
-  </style>
+    <div class="wrap2">
+      <div>블록 요소1</div>
+      <div>블록 요소2</div>
+      <div>블록 요소3</div>
+    </div>
 
-  <div class="wrap2">
-    <div>블록 요소1</div>
-    <div>블록 요소2</div>
-    <div>블록 요소3</div>
-  </div>
+    <hr />
 
-  <hr>
+    <style>
+      .gnb li {
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        border: 1px solid gray;
+      }
 
-  <style>
-    .gnb li {
-      display: inline-block;
-      width: 100px;
-      height: 50px;
-      border: 1px solid gray;
-    }
+      .gnb a {
+        /* 중요 !!! */
+        display: block;
+        width: 100px;
+        height: 50px;
+        color: gray;
+        text-align: center;
+        line-height: 50px; /* 세로 적용 */
+        vertical-align: middle; /* 적용 안됨 */
+        text-decoration: none;
+      }
 
-    .gnb a { /* 중요 !!! */
-      display: block;
-      width: 100px;
-      height: 50px;
-      color: gray;
-      text-align: center;
-      line-height: 50px; /* 세로 적용 */ 
-      vertical-align: middle; /* 적용 안됨 */
-      text-decoration: none;
-    }
-
-    .gnb a:hover {
-      background-color: black;
-      color: white;
-    }
-
-  </style>
-  <!-- 사용자 친화적 -->
-  <ul class="gnb">
-    <li><a href="#">메뉴1</a></li>
-    <li><a href="#">메뉴2</a></li>
-    <li><a href="#">메뉴3</a></li>
-    <li><a href="#">메뉴4</a></li>
-    <li><a href="#">메뉴5</a></li>
-  </ul>
-
-</body>
-
+      .gnb a:hover {
+        background-color: black;
+        color: white;
+      }
+    </style>
+    <!-- 사용자 친화적 -->
+    <ul class="gnb">
+      <li><a href="#">메뉴1</a></li>
+      <li><a href="#">메뉴2</a></li>
+      <li><a href="#">메뉴3</a></li>
+      <li><a href="#">메뉴4</a></li>
+      <li><a href="#">메뉴5</a></li>
+    </ul>
+  </body>
 </html>
