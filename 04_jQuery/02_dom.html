@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_dom</title>
+    <!-- CDN을 이용하기 -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body style="background-color: gray">
+    <div id="box" class="wrap">box</div>
+    <script>
+      // 태그 인식 : 배열
+      var div = $("#div"); // document.getElementsByTagname('div')
+      console.log(div);
+
+      // 아이디 인식 : 객체
+      var box = $("#box"); // document.getElementById('box')
+      console.log(box);
+
+      // 클래스인식 : 배열
+      var wrap = $(".wrap"); // document.getElementsByClassName('wrap')
+      console.log(wrap);
+    </script>
+
+    <ul class="ott">
+      <li id="netflex"><a href="javascript:void(0)">넷플릭스</a></li>
+      <li id="disnyplus"><a href="javascript:void(0)">디즈니플러스</a></li>
+      <li id="tving"><a id="tving-link" href="javascript:void(0)">티빙</a></li>
+      <li id="wave"><a href="javascript:void(0)">웨이브</a></li>
+      <li id="coupangplay"><a href="javascript:void(0)">쿠팡플레이</a></li>
+    </ul>
+
+    <script>
+      // 1. 자식과 후손
+      console.log($(".ott > li"));
+      console.log($(".ott").find("li"));
+      console.log($(".ott").children("li"));
+      console.log($(".ott").children());
+
+      // 2. 후손
+      console.log($(".ott a"));
+      console.log($(".ott").find("a"));
+      console.log($(".ott").children("li").children("a"));
+      console.log($(".ott").children().children());
+
+      // 3. 모든 형제
+      console.log($("#tving ~ li")); // 일반 형제 (#tving 의 다음 형제들)
+      console.log($("#tving").nextAll("li")); // 다음 형제 (#tving 의 다음 형제들)
+      console.log($("#tving").prevAll("li")); // 이전 형제 (#tving 의 이전 형제들)
+      console.log($("#tving").siblings("li")); // 모든 형제 (#tving 의 일반 형제들)
+
+      // 4. 인접 형제
+      console.log($("#tving + li")); // 인접 형제 (#tving 의 다음 형제)
+      console.log($("#tving").next("li")); // 다음 형제 (#tving 의 다음 형제)
+      console.log($("#tving").prev("li")); // 이전 형제 (#tving 의 이전 형제)
+
+      // 5. 부모와 조상
+      console.log($("#tving-link").parent("li")); // 부모
+      console.log($("#tving-link").closest("li")); // 가장 가까운 부모
+      console.log($("#tving-link").parents()); // 부모 & 조상
+    </script>
+  </body>
+</html>
