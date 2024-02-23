@@ -36,7 +36,7 @@
     </ul>
 
     <script>
-      // 1. 자식과 후손
+      // 1. 자식
       console.log($(".ott > li"));
       console.log($(".ott").find("li"));
       console.log($(".ott").children("li"));
@@ -48,7 +48,7 @@
       console.log($(".ott").children("li").children("a"));
       console.log($(".ott").children().children());
 
-      // 3. 모든 형제
+      // 3. 일반 형제
       console.log($("#tving ~ li")); // 일반 형제 (#tving 의 다음 형제들)
       console.log($("#tving").nextAll("li")); // 다음 형제 (#tving 의 다음 형제들)
       console.log($("#tving").prevAll("li")); // 이전 형제 (#tving 의 이전 형제들)
@@ -86,19 +86,25 @@
       console.log($(":checkbox"));
 
       // 상태 지정
-      console.log($(":focus")); //포커스를 가진 요소
-      console.log($(":focus")); //포커스를 가진 요소
-      console.log($(":focus")); //포커스를 가진 요소
+      console.log($(":focus")); // 포커스를 가진 요소
+      console.log($(":text:focus")); // text 중 포커스를 가진 요소
+      console.log($("checked")); // 체크된 요소
+      console.log($(":radio:checked")); // radio 중 체크된 요소
+      console.log($(":checkbox:checked")); // checkbox 중 체크된 요소
+      console.log($(":selected")); // 선택된 요소
 
-      /*=======================================================*/
-      /*
-      // 상태 확인      
-      console.log();
+      // 상태 확인
+      console.log($(":text").is(":focus")); // text가 포커스를 가지면 true 반환
+      console.log($(":radio").is(":checked")); // radio가 체크되면 true 반환
+      console.log($(":option").is(":selected")); // option이 선택되면 true 반환
+    </script>
 
-      깃허브 참고 작성하기
+    <div id="div1"><h1>hello world</h1></div>
 
-        */
-      /*=======================================================*/
+    <script>
+      // 내부 텍스트 : text()
+      console.log($("#div1").text());
+      $("#div1").text("안녕하세요 반갑습니다");
     </script>
 
     <div id="div2"><h1>hello world</h1></div>
@@ -110,10 +116,11 @@
     </script>
 
     <div id="div3">
-      <img src="../../assets/image/animal10.jpg" width="193px" />
+      <img src="../../assets/image/animal10.jpg" width="192px" />
     </div>
 
     <script>
+      // 태그 속성(attribute)
       console.log($("#div3").find("img").attr("src"));
       $("#div3").find("img").attr("src", "../../assets/image/flower1.jpg");
       $("#div3").find("img").removeAttr("src");
@@ -174,15 +181,56 @@
     <div id="div7">hello world</div>
 
     <script>
+      // style 속성
       $("#div7").css("fontSize", "32px"); // camel case 가능
       $("#div7").css("font-weight", "900"); // 원래 이름 가능
       $("#div7").css("text-align", "center").css("line-height", "100px"); // 원래 이름 가능
       $("#div7").css({
+        // 객체로 등록3
         width: "200px",
         height: "100px",
         border: "1px solid orange",
         backgroundColor: "crimson",
       });
+    </script>
+
+    <div id="menu"></div>
+    <script>
+      /* 
+        추가
+        1. "마지막" 자식으로 추가하기 
+          1) 부모.append(자식) 
+          2) 자식.appendTo(부모) 
+        2. "첫 번째" 자식으로 추가하기
+          1) 부모.prepend(자식)
+          2) 자식.prependTo(부모)
+        3. 다음 형제로 추가하기 
+          형제.after(형제)
+        4. 이전 형제로 추가하기
+          형제.before(형제)
+      */
+
+      var menu = $("#menu");
+
+      menu.append("<div>피자</div>");
+      $("<div>족발</div>").appendTo(menu);
+
+      menu.prepend("<div>회</div>");
+      $("<div>떡볶이</div>").prependTo(menu);
+
+      $("#menu > div:last-of-type").after("<div>보쌈</div>");
+      $("#menu > div:first-of-type").before("<div>아구찜</div>");
+
+      /*
+        삭제
+        1. 선택 삭제
+          요소.remove()
+        2. 모두 삭제 (하위 요소를 모두 지운다.)
+          요소.empty()
+      */
+
+      $("#menu > div:nth-of-type(2)").remove();
+      $("#menu").empty();
     </script>
   </body>
 </html>
