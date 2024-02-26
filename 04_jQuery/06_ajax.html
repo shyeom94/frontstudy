@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06_ajax</title>
+    <!-- CDN을 이용하기 -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body style="background-color: gray">
+    <div>
+      <button type="button" id="btn1">버튼1</button>
+    </div>
+    <script>
+      $("#btn1").on("click", function (evt) {
+        // get 방식의 ajax 처리
+        $.get(
+          "https://thetestrequest.com/authors/1.xml",
+          "xml", // 요청하는 데이터 타입 표기(json, xml, ... )
+          function (resData) {
+            console.log("success", resData);
+          }
+        )
+          // 3.0 이후
+          .done(function (resData) {
+            // .success(function(){}) // 3.0 이전
+            console.log("done", resData);
+          })
+          // 3.0 이후
+          .fail(function () {
+            // .error(function(){}) // 3.0 이전
+            console.log("fail");
+          })
+          // 3.0 이후
+          .always(function () {
+            // .complete(function(){}) // 3.0 이전
+            console.log("always");
+          });
+      });
+    </script>
+
+    <hr />
+
+    <div>
+      <button type="button" id="btn2">버튼2</button>
+    </div>
+
+    <script>
+      $("#btn2").on("click", function (evt) {
+        $.getJSON(
+          "https://jsonplaceholder.typicode.com/photos/1",
+          function (resData) {
+            console.log("success", resData);
+          }
+        )
+          .done(function (resData) {
+            console.log("done", resData);
+          })
+          .fail(function () {
+            console.log("fail");
+          })
+          .always(function () {
+            console.log("always");
+          });
+      });
+    </script>
+  </body>
+</html>

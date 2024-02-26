@@ -70,5 +70,87 @@
         */
       });
     </script>
+
+    <hr />
+
+    <div>
+      <ul>
+        <li class="menu">김치찌개</li>
+        <li class="menu">순두부찌개</li>
+        <li class="menu">된장찌개</li>
+      </ul>
+    </div>
+    <script>
+      // JavaScript 이벤트 객체 반복문으로 배열의
+      // var menu = document.getElementsByClassName("menu");
+      // for (var i = 0; i < menu.length; i++) {
+      //   menu[i].addEventListener("click", function (evt) {
+      //     alert(evt.target.textContent);
+      //   });
+      // }
+
+      // jQuery는 반복문 없이 배열의 이벤트 처리를 수행할 수 있다.
+      $(".menu").on("click", function (evt) {
+        alert(evt.target.textContent);
+      });
+    </script>
+    <hr />
+
+    <div>
+      <button type="button" id="btn2">버튼2</button>
+      <div></div>
+    </div>
+
+    <script>
+      var menu = [
+        {
+          name: "김치찌개",
+          price: 10000,
+        },
+        {
+          name: "순두부찌개",
+          price: 15000,
+        },
+        {
+          name: "된장찌개",
+          price: 20000,
+        },
+      ];
+
+      var btn2 = $("#btn2");
+      var div = btn2.next();
+
+      btn2.on("click", function (evt) {
+        for (var i = 0; i < menu.length; i++) {
+          var str = "<div>";
+          str += "<span>" + menu[i].name + "</span>";
+          str += "<span>" + menu[i].price + "</span>";
+          str += '<button class="btn-alert" type="button">확인</button>'; // 동적 요소
+          str += "</div>";
+          div.append(str);
+        }
+      });
+      $(document).on("click", ".btn-alert", function (evt) {
+        alert($(evt.target).prev().prev().text());
+      });
+    </script>
+
+    <hr />
+
+    <div>
+      <button type="button" id="btn3">버튼3</button>
+      <div>안녕하세요</div>
+    </div>
+    <script>
+      var btn3 = $("#btn3");
+      var div = btn3.next();
+      div.on("click", function (evt) {
+        alert(evt.target.textContent);
+      });
+      btn3.on("click", function (evt) {
+        // div 의 click 이벤트를 동작시킨다.
+        div.trigger("click");
+      });
+    </script>
   </body>
 </html>
