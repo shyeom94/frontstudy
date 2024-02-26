@@ -68,5 +68,37 @@
           });
       });
     </script>
+    <hr />
+    <div>
+      <button type="button" id="btn3">버튼3</button>
+    </div>
+    <script>
+      $("#btn3").on("click", function (evt) {
+        // 객체 만든다.
+        $.ajax({
+          /* 요청 */
+          type: "GET",
+          url: "https://thetestrequest.com/authors/1.xml",
+          async: true,
+          /* 응답 */
+          dataType: "xml",
+          success: function (resData) {
+            console.log("success", resData);
+          },
+          error: function (jqXHR) {
+            console.log("error", jqXHR.status, jqXHR.statusText); // 응답코드 (ex) 404 ... )
+          },
+        })
+          .done(function (resData) {
+            console.log("done", resData);
+          })
+          .fail(function (jqXHR) {
+            console.log("fail", jqXHR.status, jqXHR.statusText); // 응답코드 (ex) 404 ... )
+          })
+          .always(function () {
+            console.log("always");
+          });
+      });
+    </script>
   </body>
 </html>
